@@ -93,10 +93,11 @@ export default function Sidebar() {
                 <div className="p-4 border-t border-white/10">
                     <div className="bg-white/10 rounded-xl p-4 text-center backdrop-blur-sm">
                         <p className="text-xs text-[var(--light-gold)] mb-1">Version 1.0 MVP</p>
-                        <p className="text-[10px] text-white/60">
-                            © 2025 Spitalverse
-                        </p>
-                    </div>
+                        <p className="text-xs text-slate-500">
+                            © 2026 Spitalverse.
+                            <br />
+                            All rights reserved.
+                        </p></div>
                 </div>
             </aside>
         </>
