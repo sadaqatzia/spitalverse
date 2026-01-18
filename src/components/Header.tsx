@@ -1,8 +1,9 @@
 'use client';
 
 import { useStore } from '@/store';
-import { Bell, Search } from 'lucide-react';
+import { Bell } from 'lucide-react';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
 
 interface HeaderProps {
     title: string;
@@ -11,9 +12,55 @@ interface HeaderProps {
 
 export default function Header({ title, subtitle }: HeaderProps) {
     const profile = useStore((state) => state.profile);
+    const appointments = useStore((state) => state.appointments);
+    const medications = useStore((state) => state.medications);
+
+    const [showNotifications, setShowNotifications] = useState(false);
+    const [upcomingItems, setUpcomingItems] = useState<{ type: 'appointment' | 'medication'; title: string; time: string; id: string }[]>([]);
+
+    useEffect(() => {
+        const checkUpcoming = () => {
+            const now = new Date();
+            const sixHoursLater = new Date(now.getTime() + 6 * 60 * 60 * 1000);
+
+            const items: { type: 'appointment' | 'medication'; title: string; time: string; id: string }[] = [];
+
+            // Check appointments
+            appointments.forEach(apt => {
+                const aptDate = new Date(`${apt.date}T${apt.time}`);
+                if (aptDate > now && aptDate <= sixHoursLater) {
+                    items.push({
+                        type: 'appointment',
+                        title: `Appt: ${apt.doctorName}`,
+                        time: apt.time,
+                        id: apt.id
+                    });
+                }
+            });
+
+            // For MVP, we'll suggest active medications are "due" if they are active
+            // In a real app, we'd parse the frequency and last taken time
+            medications.forEach(med => {
+                if (med.status === 'active' && med.reminderEnabled) {
+                    items.push({
+                        type: 'medication',
+                        title: `Take: ${med.name} (${med.dosage})`,
+                        time: 'Due Now', // Placeholder logic for MVP
+                        id: med.id
+                    });
+                }
+            });
+
+            setUpcomingItems(items);
+        };
+
+        checkUpcoming();
+        const interval = setInterval(checkUpcoming, 60000); // Update every minute
+        return () => clearInterval(interval);
+    }, [appointments, medications]);
 
     return (
-        <header className="flex items-center justify-between mb-8">
+        <header className="flex items-center justify-between mb-8 relative">
             <div>
                 <h1 className="text-2xl lg:text-3xl font-bold text-[var(--spital-green)]">
                     {title}
@@ -24,23 +71,55 @@ export default function Header({ title, subtitle }: HeaderProps) {
             </div>
 
             <div className="flex items-center gap-4">
-                {/* Search */}
-                <div className="hidden md:flex items-center gap-2 bg-white border border-[var(--border-color)] rounded-xl px-4 py-2">
-                    <Search size={18} className="text-[var(--text-muted)]" />
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        className="bg-transparent border-none outline-none text-sm w-40 text-[var(--text-primary)]"
-                    />
-                </div>
-
                 {/* Notifications */}
-                <button className="relative p-3 rounded-xl bg-white border border-[var(--border-color)] hover:border-[var(--spital-gold)] transition-colors">
-                    <Bell size={20} className="text-[var(--text-secondary)]" />
-                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-[var(--signal-red)] rounded-full text-xs flex items-center justify-center text-white font-medium">
-                        3
-                    </span>
-                </button>
+                <div className="relative">
+                    <button
+                        onClick={() => setShowNotifications(!showNotifications)}
+                        className="relative p-3 rounded-xl bg-white border border-[var(--border-color)] hover:border-[var(--spital-gold)] transition-colors"
+                    >
+                        <Bell size={20} className="text-[var(--text-secondary)]" />
+                        {upcomingItems.length > 0 && (
+                            <span className="absolute -top-1 -right-1 w-5 h-5 bg-[var(--signal-red)] rounded-full text-xs flex items-center justify-center text-white font-medium">
+                                {upcomingItems.length}
+                            </span>
+                        )}
+                    </button>
+
+                    {showNotifications && (
+                        <>
+                            <div
+                                className="fixed inset-0 z-40"
+                                onClick={() => setShowNotifications(false)}
+                            />
+                            <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-xl shadow-xl border border-[var(--border-color)] z-50 overflow-hidden">
+                                <div className="p-3 border-b border-[var(--border-color)] bg-gray-50 flex justify-between items-center">
+                                    <h3 className="font-semibold text-[var(--text-primary)]">Notifications</h3>
+                                    <span className="text-xs text-[var(--text-muted)]">{upcomingItems.length} New</span>
+                                </div>
+                                <div className="max-h-80 overflow-y-auto">
+                                    {upcomingItems.length === 0 ? (
+                                        <div className="p-4 text-center text-sm text-[var(--text-muted)]">
+                                            No upcoming reminders
+                                        </div>
+                                    ) : (
+                                        upcomingItems.map((item) => (
+                                            <div key={item.id} className="p-3 border-b border-[var(--border-color)] last:border-0 hover:bg-gray-50">
+                                                <div className="flex items-start gap-3">
+                                                    <div className={`w-2 h-2 rounded-full mt-2 ${item.type === 'appointment' ? 'bg-[var(--spital-gold)]' : 'bg-[var(--spital-green)]'
+                                                        }`} />
+                                                    <div>
+                                                        <p className="text-sm font-medium text-[var(--text-primary)]">{item.title}</p>
+                                                        <p className="text-xs text-[var(--text-muted)]">{item.time}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))
+                                    )}
+                                </div>
+                            </div>
+                        </>
+                    )}
+                </div>
 
                 {/* Profile */}
                 <div className="flex items-center gap-3">

@@ -90,14 +90,13 @@ export default function Sidebar() {
                 </nav>
 
                 {/* Footer */}
-                <div className="p-4 border-t border-white/10">
-                    <div className="bg-white/10 rounded-xl p-4 text-center backdrop-blur-sm">
-                        <p className="text-xs text-[var(--light-gold)] mb-1">Version 1.0 MVP</p>
-                        <p className="text-xs text-slate-500">
-                            © 2026 Spitalverse.
-                            <br />
-                            All rights reserved.
-                        </p></div>
+                <div className="p-2 border-t border-white/10">
+                    <div className="bg-white/10 rounded-xl p-2 text-center backdrop-blur-sm">
+                        <p className="text-[10px] text-[var(--light-gold)]">Version 1.0 MVP</p>
+                        <p className="text-[10px] text-slate-500">
+                            © 2026 Spitalverse. All rights reserved.
+                        </p>
+                    </div>
                 </div>
             </aside>
         </>
