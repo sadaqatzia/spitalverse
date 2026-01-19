@@ -23,6 +23,7 @@ const defaultProfile: PatientProfile = {
         name: 'Jane Doe',
         relationship: 'Spouse',
         phone: '+1 (555) 123-4567',
+        bloodGroup: 'A+',
     },
 };
 

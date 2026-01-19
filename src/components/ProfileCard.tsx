@@ -115,7 +115,7 @@ export default function ProfileCard() {
                             </button>
                         </div>
 
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 mb-4">
+                        <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-4">
                             <div className="bg-[var(--spital-slate)] rounded-lg sm:rounded-xl p-2 sm:p-3 text-center border border-[var(--border-color)]">
                                 <p className="text-[10px] sm:text-xs text-[var(--text-muted)] mb-0.5 sm:mb-1">Blood Group</p>
                                 <p className="text-base sm:text-lg font-bold text-[var(--signal-red)]">{profile.bloodGroup || '-'}</p>
@@ -124,12 +124,6 @@ export default function ProfileCard() {
                                 <p className="text-[10px] sm:text-xs text-[var(--text-muted)] mb-0.5 sm:mb-1">DOB</p>
                                 <p className="text-xs sm:text-sm font-medium text-[var(--text-primary)]">
                                     {profile.dateOfBirth ? formatDate(profile.dateOfBirth) : '-'}
-                                </p>
-                            </div>
-                            <div className="bg-[var(--spital-slate)] rounded-lg sm:rounded-xl p-2 sm:p-3 text-center col-span-2 border border-[var(--border-color)]">
-                                <p className="text-[10px] sm:text-xs text-[var(--text-muted)] mb-0.5 sm:mb-1">Emergency Contact</p>
-                                <p className="text-xs sm:text-sm font-medium text-[var(--text-primary)]">
-                                    {profile.emergencyContact.name || 'Not set'}
                                 </p>
                             </div>
                         </div>
@@ -272,52 +266,6 @@ export default function ProfileCard() {
                                 </button>
                             </span>
                         ))}
-                    </div>
-                </div>
-
-                {/* Emergency Contact */}
-                <div className="md:col-span-2">
-                    <p className="text-sm font-semibold text-[var(--spital-green)] mb-4">Emergency Contact</p>
-                    <div className="grid md:grid-cols-3 gap-4">
-                        <div>
-                            <label className="input-label">Name</label>
-                            <input
-                                type="text"
-                                className="input-field"
-                                value={formData.emergencyContact.name}
-                                onChange={(e) => setFormData({
-                                    ...formData,
-                                    emergencyContact: { ...formData.emergencyContact, name: e.target.value },
-                                })}
-                                placeholder="Contact name"
-                            />
-                        </div>
-                        <div>
-                            <label className="input-label">Relationship</label>
-                            <input
-                                type="text"
-                                className="input-field"
-                                value={formData.emergencyContact.relationship}
-                                onChange={(e) => setFormData({
-                                    ...formData,
-                                    emergencyContact: { ...formData.emergencyContact, relationship: e.target.value },
-                                })}
-                                placeholder="e.g., Spouse, Parent"
-                            />
-                        </div>
-                        <div>
-                            <label className="input-label">Phone</label>
-                            <input
-                                type="tel"
-                                className="input-field"
-                                value={formData.emergencyContact.phone}
-                                onChange={(e) => setFormData({
-                                    ...formData,
-                                    emergencyContact: { ...formData.emergencyContact, phone: e.target.value },
-                                })}
-                                placeholder="+1 234 567 8900"
-                            />
-                        </div>
                     </div>
                 </div>
             </div>

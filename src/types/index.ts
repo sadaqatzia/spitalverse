@@ -10,6 +10,7 @@ export interface PatientProfile {
     name: string;
     relationship: string;
     phone: string;
+    bloodGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'AB+' | 'AB-' | 'O+' | 'O-';
   };
 }
 

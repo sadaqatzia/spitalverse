@@ -12,6 +12,8 @@ import {
     Shield,
     Heart,
     X,
+    Stethoscope,
+    Lightbulb,
 } from 'lucide-react';
 import { useSidebar } from './SidebarContext';
 
@@ -21,6 +23,8 @@ const navItems = [
     { href: '/medications', icon: Pill, label: 'Medications' },
     { href: '/lab-reports', icon: TestTube, label: 'Lab Reports' },
     { href: '/appointments', icon: Calendar, label: 'Appointments' },
+    { href: '/symptom-checker', icon: Stethoscope, label: 'Symptom Checker' },
+    { href: '/health-tips', icon: Lightbulb, label: 'Health Tips' },
     { href: '/ai-summary', icon: Brain, label: 'AI Summary' },
     { href: '/privacy', icon: Shield, label: 'My Data' },
 ];
