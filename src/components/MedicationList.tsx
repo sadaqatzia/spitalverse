@@ -84,14 +84,14 @@ export default function MedicationList() {
     };
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
             {/* Header */}
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                    <h2 className="text-xl font-semibold text-[var(--text-primary)]">Current Medications</h2>
-                    <p className="text-sm text-[var(--text-muted)]">{activeMedications.length} active</p>
+                    <h2 className="text-lg sm:text-xl font-semibold text-[var(--text-primary)]">Current Medications</h2>
+                    <p className="text-xs sm:text-sm text-[var(--text-muted)]">{activeMedications.length} active</p>
                 </div>
-                <button onClick={() => handleOpenModal()} className="btn-primary flex items-center gap-2">
+                <button onClick={() => handleOpenModal()} className="btn-primary flex items-center justify-center gap-2 w-full sm:w-auto">
                     <Plus size={18} />
                     Add Medication
                 </button>
@@ -100,66 +100,66 @@ export default function MedicationList() {
             {/* Active Medications */}
             <div className="space-y-3">
                 {activeMedications.length === 0 ? (
-                    <div className="glass-card p-8 text-center">
-                        <Pill size={48} className="mx-auto text-[var(--text-muted)] mb-4" />
-                        <p className="text-[var(--text-secondary)]">No active medications</p>
-                        <p className="text-sm text-[var(--text-muted)]">Add your medications to track them</p>
+                    <div className="glass-card p-6 sm:p-8 text-center">
+                        <Pill size={40} className="sm:w-12 sm:h-12 mx-auto text-[var(--text-muted)] mb-3 sm:mb-4" />
+                        <p className="text-sm sm:text-base text-[var(--text-secondary)]">No active medications</p>
+                        <p className="text-xs sm:text-sm text-[var(--text-muted)]">Add your medications to track them</p>
                     </div>
                 ) : (
                     activeMedications.map((medication) => (
-                        <div key={medication.id} className="glass-card p-4">
-                            <div className="flex items-start justify-between">
-                                <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 rounded-xl bg-[var(--spital-gold)] flex items-center justify-center flex-shrink-0">
-                                        <Pill size={24} className="text-[var(--spital-green)]" />
+                        <div key={medication.id} className="glass-card p-3 sm:p-4">
+                            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                                <div className="flex items-start gap-3 sm:gap-4">
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[var(--spital-gold)] flex items-center justify-center flex-shrink-0">
+                                        <Pill size={20} className="sm:w-6 sm:h-6 text-[var(--spital-green)]" />
                                     </div>
                                     <div>
-                                        <h3 className="font-semibold text-[var(--text-primary)]">{medication.name}</h3>
-                                        <p className="text-sm text-[var(--text-secondary)]">
+                                        <h3 className="text-sm sm:text-base font-semibold text-[var(--text-primary)]">{medication.name}</h3>
+                                        <p className="text-xs sm:text-sm text-[var(--text-secondary)]">
                                             {medication.dosage} • {medication.frequency}
                                         </p>
-                                        <div className="flex items-center gap-3 mt-2">
+                                        <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-1.5 sm:mt-2">
                                             <span className="status-active">Active</span>
-                                            <span className="text-xs text-[var(--text-muted)] flex items-center gap-1">
-                                                <Calendar size={12} />
+                                            <span className="text-[10px] sm:text-xs text-[var(--text-muted)] flex items-center gap-1">
+                                                <Calendar size={10} className="sm:w-3 sm:h-3" />
                                                 Started {format(new Date(medication.startDate), 'MMM d, yyyy')}
                                             </span>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-1.5 sm:gap-2 justify-end sm:justify-start">
                                     <button
                                         onClick={() => toggleReminder(medication)}
-                                        className={`p-2 rounded-lg transition-colors ${medication.reminderEnabled
+                                        className={`p-1.5 sm:p-2 rounded-lg transition-colors ${medication.reminderEnabled
                                             ? 'bg-[var(--spital-gold)] text-[var(--spital-green)]'
                                             : 'bg-[var(--spital-slate-dark)] text-[var(--text-muted)]'
                                             }`}
                                         title={medication.reminderEnabled ? 'Reminder on' : 'Reminder off'}
                                     >
-                                        {medication.reminderEnabled ? <Bell size={18} /> : <BellOff size={18} />}
+                                        {medication.reminderEnabled ? <Bell size={16} className="sm:w-[18px] sm:h-[18px]" /> : <BellOff size={16} className="sm:w-[18px] sm:h-[18px]" />}
                                     </button>
                                     <button
                                         onClick={() => handleOpenModal(medication)}
-                                        className="p-2 rounded-lg bg-[var(--spital-slate-dark)] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
+                                        className="p-1.5 sm:p-2 rounded-lg bg-[var(--spital-slate-dark)] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
                                     >
-                                        <Edit2 size={18} />
+                                        <Edit2 size={16} className="sm:w-[18px] sm:h-[18px]" />
                                     </button>
                                     <button
                                         onClick={() => markAsCompleted(medication)}
-                                        className="btn-secondary text-sm py-2 px-3"
+                                        className="btn-secondary text-xs sm:text-sm py-1.5 px-2 sm:py-2 sm:px-3"
                                     >
                                         Complete
                                     </button>
                                     <button
                                         onClick={() => handleDelete(medication.id)}
-                                        className="p-2 rounded-lg bg-[var(--spital-slate-dark)] text-[var(--signal-red)] hover:bg-[var(--signal-red)] hover:text-white transition-colors"
+                                        className="p-1.5 sm:p-2 rounded-lg bg-[var(--spital-slate-dark)] text-[var(--signal-red)] hover:bg-[var(--signal-red)] hover:text-white transition-colors"
                                     >
-                                        <Trash2 size={18} />
+                                        <Trash2 size={16} className="sm:w-[18px] sm:h-[18px]" />
                                     </button>
                                 </div>
                             </div>
                             {medication.notes && (
-                                <p className="text-sm text-[var(--text-muted)] mt-3 pl-16">{medication.notes}</p>
+                                <p className="text-xs sm:text-sm text-[var(--text-muted)] mt-2 sm:mt-3 pl-0 sm:pl-16">{medication.notes}</p>
                             )}
                         </div>
                     ))

@@ -1,4 +1,3 @@
-// Patient Profile Types
 export interface PatientProfile {
   id: string;
   photo: string | null;
@@ -14,7 +13,6 @@ export interface PatientProfile {
   };
 }
 
-// Document Types
 export type DocumentCategory = 'labs' | 'prescriptions' | 'imaging' | 'discharge';
 
 export interface MedicalDocument {
@@ -27,7 +25,6 @@ export interface MedicalDocument {
   fileSize: number;
 }
 
-// Medication Types
 export type MedicationStatus = 'active' | 'completed';
 
 export interface Medication {
@@ -42,7 +39,6 @@ export interface Medication {
   notes?: string;
 }
 
-// Lab Report Types
 export type TrendDirection = 'up' | 'down' | 'normal';
 
 export interface LabValue {
@@ -63,7 +59,6 @@ export interface LabReport {
   values: LabValue[];
 }
 
-// Appointment Types
 export interface Appointment {
   id: string;
   doctorName: string;
@@ -75,7 +70,6 @@ export interface Appointment {
   isUpcoming: boolean;
 }
 
-// AI Health Summary
 export interface HealthSummary {
   id: string;
   generatedAt: string;
@@ -84,7 +78,6 @@ export interface HealthSummary {
   riskLevel: 'low' | 'moderate' | 'high';
 }
 
-// App State
 export interface AppState {
   profile: PatientProfile;
   documents: MedicalDocument[];
@@ -92,8 +85,7 @@ export interface AppState {
   labReports: LabReport[];
   appointments: Appointment[];
   healthSummaries: HealthSummary[];
-  
-  // Actions
+
   updateProfile: (profile: Partial<PatientProfile>) => void;
   addDocument: (document: MedicalDocument) => void;
   deleteDocument: (id: string) => void;

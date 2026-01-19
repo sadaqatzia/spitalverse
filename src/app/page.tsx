@@ -17,7 +17,6 @@ export default function Dashboard() {
     .sort((a, b) => new Date(`${a.date}T${a.time}`).getTime() - new Date(`${b.date}T${b.time}`).getTime())
     .slice(0, 2);
 
-  // Get abnormal lab values
   const abnormalValues = labReports.flatMap((report) =>
     report.values.filter((v) => v.trend !== 'normal')
   );
@@ -65,7 +64,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4 sm:space-y-8">
       <Header
         title={profile.fullName ? `Welcome back, ${profile.fullName.split(' ')[0]}!` : 'Welcome to Spitalverse'}
         subtitle="Here's your health overview for today"
@@ -75,28 +74,28 @@ export default function Dashboard() {
       <ProfileCard />
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
         {stats.map((stat) => {
           const Icon = stat.icon;
           return (
             <Link key={stat.label} href={stat.href}>
-              <div className="glass-card p-5 cursor-pointer group">
-                <div className={`w-12 h-12 rounded-xl ${stat.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                  <Icon size={24} className="text-white" />
+              <div className="glass-card p-3 sm:p-5 cursor-pointer group">
+                <div className={`w-9 h-9 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl ${stat.color} flex items-center justify-center mb-2 sm:mb-4 group-hover:scale-110 transition-transform`}>
+                  <Icon size={18} className="sm:w-6 sm:h-6 text-white" />
                 </div>
-                <p className="text-3xl font-bold text-[var(--spital-green)]">{stat.value}</p>
-                <p className="text-sm text-[var(--text-muted)]">{stat.label}</p>
+                <p className="text-xl sm:text-3xl font-bold text-[var(--spital-green)]">{stat.value}</p>
+                <p className="text-xs sm:text-sm text-[var(--text-muted)]">{stat.label}</p>
               </div>
             </Link>
           );
         })}
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
         {/* Upcoming Appointments */}
-        <div className="glass-card p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-[var(--spital-green)] flex items-center gap-2">
+        <div className="glass-card p-4 sm:p-6">
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
+            <h3 className="text-base sm:text-lg font-semibold text-[var(--spital-green)] flex items-center gap-2">
               <Calendar size={20} className="text-[var(--spital-gold)]" />
               Upcoming Appointments
             </h3>
@@ -112,17 +111,17 @@ export default function Dashboard() {
           ) : (
             <div className="space-y-3">
               {upcomingAppointments.map((apt) => (
-                <div key={apt.id} className="flex items-center gap-4 p-3 bg-[var(--spital-slate)] rounded-xl border border-[var(--border-color)]">
-                  <div className="w-10 h-10 rounded-lg bg-[var(--spital-gold)] flex items-center justify-center">
-                    <Calendar size={18} className="text-[var(--spital-green)]" />
+                <div key={apt.id} className="flex items-center gap-3 sm:gap-4 p-2 sm:p-3 bg-[var(--spital-slate)] rounded-lg sm:rounded-xl border border-[var(--border-color)]">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-[var(--spital-gold)] flex items-center justify-center flex-shrink-0">
+                    <Calendar size={16} className="sm:w-[18px] sm:h-[18px] text-[var(--spital-green)]" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-[var(--text-primary)] truncate">{apt.doctorName}</p>
-                    <p className="text-xs text-[var(--text-muted)]">
+                    <p className="text-sm sm:text-base font-medium text-[var(--text-primary)] truncate">{apt.doctorName}</p>
+                    <p className="text-[10px] sm:text-xs text-[var(--text-muted)]">
                       {format(new Date(apt.date), 'MMM d')} at {apt.time}
                     </p>
                   </div>
-                  <span className="tag">{apt.specialty}</span>
+                  <span className="tag text-[10px] sm:text-xs hidden sm:inline-flex">{apt.specialty}</span>
                 </div>
               ))}
             </div>
@@ -130,9 +129,9 @@ export default function Dashboard() {
         </div>
 
         {/* Active Medications */}
-        <div className="glass-card p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-[var(--spital-green)] flex items-center gap-2">
+        <div className="glass-card p-4 sm:p-6">
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
+            <h3 className="text-base sm:text-lg font-semibold text-[var(--spital-green)] flex items-center gap-2">
               <Pill size={20} className="text-[var(--spital-gold)]" />
               Active Medications
             </h3>

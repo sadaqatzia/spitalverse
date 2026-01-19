@@ -26,7 +26,6 @@ const defaultProfile: PatientProfile = {
     },
 };
 
-// Sample medications for demo
 const sampleMedications: Medication[] = [
     {
         id: uuidv4(),
@@ -74,7 +73,6 @@ const sampleMedications: Medication[] = [
     },
 ];
 
-// Sample lab report for demo (German/EU Standards)
 const sampleLabReports: LabReport[] = [
     {
         id: uuidv4(),
@@ -94,7 +92,6 @@ const sampleLabReports: LabReport[] = [
     },
 ];
 
-// Sample appointments for demo
 const sampleAppointments: Appointment[] = [
     {
         id: uuidv4(),

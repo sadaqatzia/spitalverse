@@ -45,7 +45,7 @@ export default function PrivacyPage() {
     ];
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-4 sm:space-y-8">
             <Header
                 title="Privacy & My Data"
                 subtitle="You own your data. Export, view, or delete it anytime."

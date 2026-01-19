@@ -8,7 +8,6 @@ import { LabReport, LabValue, TrendDirection } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
 import { format } from 'date-fns';
 
-// German/EU Standard Lab Values
 const labCategories = {
     cbc: {
         name: 'Complete Blood Count (CBC)',
@@ -96,7 +95,6 @@ const labCategories = {
     },
 };
 
-// Quick add popular tests
 const popularTests = [
     { name: 'Hemoglobin', unit: 'g/dL', normalRange: { min: 12.0, max: 17.5 } },
     { name: 'Fasting Blood Glucose', unit: 'mg/dL', normalRange: { min: 70, max: 99 } },
@@ -282,13 +280,11 @@ export default function LabReportManager() {
         return null;
     };
 
-    // Get all tests for search
     const allTests = Object.values(labCategories).flatMap((cat) => cat.tests);
     const filteredTests = searchQuery
         ? allTests.filter((test) => test.name.toLowerCase().includes(searchQuery.toLowerCase()))
         : [];
 
-    // Abnormal values for AI insights
     const abnormalValues = labReports.flatMap((report) =>
         report.values.filter((v) => v.trend !== 'normal')
     );

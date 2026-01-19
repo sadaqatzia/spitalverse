@@ -36,7 +36,6 @@ export default function AppointmentManager() {
         notes: '',
     });
 
-    // Separate upcoming and past appointments
     const now = new Date();
     const upcomingAppointments = appointments
         .filter((apt) => isAfter(parseISO(`${apt.date}T${apt.time}`), now))

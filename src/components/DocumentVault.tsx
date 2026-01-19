@@ -43,8 +43,6 @@ export default function DocumentVault() {
 
         if (!selectedFile) return;
 
-        // In a real app, you'd upload to a server
-        // For MVP, we'll use a data URL
         const reader = new FileReader();
         reader.onloadend = () => {
             const newDocument: MedicalDocument = {

@@ -70,11 +70,11 @@ export default function ProfileCard() {
 
     if (!isEditing) {
         return (
-            <div className="glass-card p-6">
-                <div className="flex flex-col md:flex-row gap-6">
+            <div className="glass-card p-4 sm:p-6">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
                     {/* Photo */}
-                    <div className="flex-shrink-0">
-                        <div className="w-32 h-32 rounded-2xl overflow-hidden bg-[var(--spital-gold)] flex items-center justify-center">
+                    <div className="flex-shrink-0 flex justify-center sm:justify-start">
+                        <div className="w-20 h-20 sm:w-32 sm:h-32 rounded-xl sm:rounded-2xl overflow-hidden bg-[var(--spital-gold)] flex items-center justify-center">
                             {profile.photo ? (
                                 <Image
                                     src={profile.photo}
@@ -84,7 +84,7 @@ export default function ProfileCard() {
                                     className="w-full h-full object-cover"
                                 />
                             ) : (
-                                <span className="text-4xl font-bold text-[var(--spital-green)]">
+                                <span className="text-2xl sm:text-4xl font-bold text-[var(--spital-green)]">
                                     {profile.fullName ? profile.fullName.charAt(0).toUpperCase() : '?'}
                                 </span>
                             )}
@@ -93,13 +93,13 @@ export default function ProfileCard() {
 
                     {/* Info */}
                     <div className="flex-1">
-                        <div className="flex items-start justify-between mb-4">
-                            <div>
-                                <h2 className="text-2xl font-bold text-[var(--spital-green)]">
+                        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-0 mb-4">
+                            <div className="text-center sm:text-left">
+                                <h2 className="text-lg sm:text-2xl font-bold text-[var(--spital-green)]">
                                     {profile.fullName || 'Set up your profile'}
                                 </h2>
                                 {profile.dateOfBirth && (
-                                    <p className="text-[var(--text-secondary)]">
+                                    <p className="text-sm sm:text-base text-[var(--text-secondary)]">
                                         {calculateAge(profile.dateOfBirth)} years old • {profile.gender}
                                     </p>
                                 )}
@@ -109,26 +109,26 @@ export default function ProfileCard() {
                                     setFormData(profile);
                                     setIsEditing(true);
                                 }}
-                                className="btn-secondary text-sm"
+                                className="btn-secondary text-sm w-full sm:w-auto"
                             >
                                 Edit Profile
                             </button>
                         </div>
 
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                            <div className="bg-[var(--spital-slate)] rounded-xl p-3 text-center border border-[var(--border-color)]">
-                                <p className="text-xs text-[var(--text-muted)] mb-1">Blood Group</p>
-                                <p className="text-lg font-bold text-[var(--signal-red)]">{profile.bloodGroup || '-'}</p>
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 mb-4">
+                            <div className="bg-[var(--spital-slate)] rounded-lg sm:rounded-xl p-2 sm:p-3 text-center border border-[var(--border-color)]">
+                                <p className="text-[10px] sm:text-xs text-[var(--text-muted)] mb-0.5 sm:mb-1">Blood Group</p>
+                                <p className="text-base sm:text-lg font-bold text-[var(--signal-red)]">{profile.bloodGroup || '-'}</p>
                             </div>
-                            <div className="bg-[var(--spital-slate)] rounded-xl p-3 text-center border border-[var(--border-color)]">
-                                <p className="text-xs text-[var(--text-muted)] mb-1">DOB</p>
-                                <p className="text-sm font-medium text-[var(--text-primary)]">
+                            <div className="bg-[var(--spital-slate)] rounded-lg sm:rounded-xl p-2 sm:p-3 text-center border border-[var(--border-color)]">
+                                <p className="text-[10px] sm:text-xs text-[var(--text-muted)] mb-0.5 sm:mb-1">DOB</p>
+                                <p className="text-xs sm:text-sm font-medium text-[var(--text-primary)]">
                                     {profile.dateOfBirth ? formatDate(profile.dateOfBirth) : '-'}
                                 </p>
                             </div>
-                            <div className="bg-[var(--spital-slate)] rounded-xl p-3 text-center md:col-span-2 border border-[var(--border-color)]">
-                                <p className="text-xs text-[var(--text-muted)] mb-1">Emergency Contact</p>
-                                <p className="text-sm font-medium text-[var(--text-primary)]">
+                            <div className="bg-[var(--spital-slate)] rounded-lg sm:rounded-xl p-2 sm:p-3 text-center col-span-2 border border-[var(--border-color)]">
+                                <p className="text-[10px] sm:text-xs text-[var(--text-muted)] mb-0.5 sm:mb-1">Emergency Contact</p>
+                                <p className="text-xs sm:text-sm font-medium text-[var(--text-primary)]">
                                     {profile.emergencyContact.name || 'Not set'}
                                 </p>
                             </div>
