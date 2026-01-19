@@ -24,6 +24,15 @@ export default function ProfileCard() {
         return age;
     };
 
+    const formatDate = (dateString: string): string => {
+        if (!dateString) return '-';
+        const date = new Date(dateString);
+        const day = date.getDate();
+        const month = date.toLocaleString('en-US', { month: 'long' });
+        const year = date.getFullYear();
+        return `${day} ${month} ${year}`;
+    };
+
     const handleSave = () => {
         updateProfile(formData);
         setIsEditing(false);
@@ -114,7 +123,7 @@ export default function ProfileCard() {
                             <div className="bg-[var(--spital-slate)] rounded-xl p-3 text-center border border-[var(--border-color)]">
                                 <p className="text-xs text-[var(--text-muted)] mb-1">DOB</p>
                                 <p className="text-sm font-medium text-[var(--text-primary)]">
-                                    {profile.dateOfBirth ? new Date(profile.dateOfBirth).toLocaleDateString() : '-'}
+                                    {profile.dateOfBirth ? formatDate(profile.dateOfBirth) : '-'}
                                 </p>
                             </div>
                             <div className="bg-[var(--spital-slate)] rounded-xl p-3 text-center md:col-span-2 border border-[var(--border-color)]">

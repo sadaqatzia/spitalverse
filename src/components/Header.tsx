@@ -25,14 +25,17 @@ export default function Header({ title, subtitle }: HeaderProps) {
 
             const items: { type: 'appointment' | 'medication'; title: string; time: string; id: string }[] = [];
 
-            // Check appointments
+            // Check appointments - show all upcoming appointments
             appointments.forEach(apt => {
                 const aptDate = new Date(`${apt.date}T${apt.time}`);
-                if (aptDate > now && aptDate <= sixHoursLater) {
+                if (aptDate > now) {
+                    const day = aptDate.getDate();
+                    const month = aptDate.toLocaleString('en-US', { month: 'short' });
+                    const formattedDate = `${day} ${month} at ${apt.time}`;
                     items.push({
                         type: 'appointment',
                         title: `Appt: ${apt.doctorName}`,
-                        time: apt.time,
+                        time: formattedDate,
                         id: apt.id
                     });
                 }

@@ -14,8 +14,8 @@ import {
 const defaultProfile: PatientProfile = {
     id: uuidv4(),
     photo: null,
-    fullName: 'John Doe',
-    dateOfBirth: '1985-06-15',
+    fullName: 'Nabel Alsulaiman',
+    dateOfBirth: '1997-03-28',
     gender: 'male',
     bloodGroup: 'O+',
     allergies: ['Penicillin', 'Peanuts'],
