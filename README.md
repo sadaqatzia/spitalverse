@@ -1,197 +1,126 @@
-# 🏥 Spitalverse - Personal Health Records MVP
+# Spitalverse
 
-A modern, premium healthcare application for managing personal health records. Built with Next.js 16, featuring an Executive Wellness design theme with Spital Green and Gold accent colors.
+A personal health records app I built using Next.js. It helps you keep track of medications, lab reports, appointments, and more — all stored locally in your browser.
 
 ![Next.js](https://img.shields.io/badge/Next.js-16.1-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-4.0-38bdf8)
 
-## ✨ Features
+## What it does
 
-### 📊 Dashboard
-- Quick health overview with profile card
-- Active medications count
-- Upcoming appointments
-- Health alerts for abnormal lab values
-- AI Summary call-to-action
+**Dashboard** — See everything at a glance: your profile, active meds, upcoming appointments, and any lab values that need attention.
 
-### 📁 Document Vault
-- Upload and store medical documents (PDF, images)
-- Categorize by type (Lab Report, Prescription, Imaging, etc.)
-- Preview and download functionality
-- Category-based filtering
+**Document Vault** — Upload PDFs and images of your medical documents. Filter by category (labs, prescriptions, imaging, discharge summaries).
 
-### 💊 Medication Tracker
-- Track active and completed medications
-- Dosage and frequency management
-- Start/end date tracking
-- Reminder toggle (UI)
-- Notes for each medication
+**Medication Tracker** — Keep a list of what you're taking, dosages, schedules, and notes. Mark them as active or completed.
 
-### 🧪 Lab Reports (German/EU Standards)
-- **Complete Blood Count (CBC)**: Hemoglobin, RBC, WBC, Platelets, etc.
-- **Blood Sugar Profile**: Fasting Glucose, HbA1c (% and IFCC mmol/mol)
-- **Lipid Profile**: Total Cholesterol, HDL, LDL, Triglycerides
-- **Thyroid Profile**: TSH, Free T3, Free T4
-- **Vitamins & Minerals**: Vitamin D (25-OH), B12, Iron, Ferritin
-- **Kidney Function (KFT)**: Creatinine, Urea, Uric Acid, Sodium, Potassium
-- **Liver Function (LFT)**: ALT (GPT), AST (GOT), Bilirubin, Albumin
-- **Inflammation Markers**: CRP, ESR
-- Status badges: 🟢 Normal, 🟡 Low, 🔴 High
-- AI suggestions for abnormal values
+**Lab Reports** — Enter your lab values and see if they're in the normal range. Uses German/EU reference ranges. Supports CBC, blood sugar, lipids, thyroid, vitamins, kidney/liver function, and inflammation markers.
 
-### 📅 Appointment Manager
-- Book and manage doctor appointments
-- Track upcoming and past appointments
-- Doctor name, specialty, location, notes
+**Appointments** — Track past and upcoming doctor visits with location and notes.
 
-### 🤖 AI Health Summary
-- **GPT-4 Powered** (with OpenAI API key)
-- **Local Fallback** (works without API key)
-- Analyzes medications, lab values, allergies
-- Personalized recommendations
-- Risk level assessment (Low/Moderate/High)
+**Symptom Checker** — Describe what you're feeling and get some guidance on whether it's self-care territory or worth seeing a doctor. Works best with an OpenAI API key, but there's a basic fallback without one.
 
-### 🔒 Privacy & My Data
-- View all stored data overview
-- Export all data as JSON
-- Delete all data with confirmation
-- Local-first storage (browser localStorage)
-- No server-side data storage
+**Health Tips** — Gets you daily health tips based on your profile, meds, and conditions. Categories include nutrition, exercise, sleep, stress management, etc.
 
-## 🎨 Design Theme: Executive Wellness
+**AI Summary** — Generates a summary of your health data with recommendations. Needs an OpenAI key for the full experience.
 
-| Color | Hex | Usage |
-|-------|-----|-------|
-| Spital Green | `#0E301C` | Sidebar, headings, primary elements |
-| Spital Gold | `#C5A059` | CTAs, accents, active states |
-| Light Gold | `#E2CC9D` | Hover states, highlights |
-| Spital Slate | `#F3F4F1` | Main background |
-| Signal Red | `#EF4444` | Allergies, delete actions, high values |
+**My Data** — Export everything as JSON or wipe it all. Your data stays in your browser's localStorage — nothing gets sent to any server.
 
-## 🚀 Quick Start
+## The look
 
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
+I went with a "Executive Wellness" vibe:
+- Dark green (`#0E301C`) for the sidebar
+- Gold accents (`#C5A059`) for buttons and highlights
+- Cream/slate background (`#F3F4F1`)
+- Red for warnings and allergies
 
-### Installation
+Works on mobile too — sidebar collapses into a hamburger menu.
+
+## Getting started
 
 ```bash
-# Clone the repository
 git clone https://github.com/yourusername/spitalverse.git
 cd spitalverse
-
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Then open http://localhost:3000
 
-### Environment Variables (Optional)
+### Optional: Add OpenAI for better AI features
 
-For AI-powered health summaries, create a `.env.local` file:
-
-```bash
-OPENAI_API_KEY=sk-your-openai-api-key-here
-```
-
-**Without the API key**, the app uses a local algorithm for summaries (still functional).
-
-## 📦 Deployment
-
-### Deploy to Vercel (Recommended)
-
-1. **Push to GitHub**
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit: Spitalverse MVP"
-   git branch -M main
-   git remote add origin https://github.com/yourusername/spitalverse.git
-   git push -u origin main
-   ```
-
-2. **Import to Vercel**
-   - Go to [vercel.com](https://vercel.com)
-   - Click "Import Project"
-   - Select your GitHub repository
-   - Click "Deploy"
-
-3. **Add Environment Variables** (Optional)
-   - Go to Project Settings → Environment Variables
-   - Add `OPENAI_API_KEY` with your key
-   - Redeploy
-
-### Deploy to Other Platforms
-
-The app is a standard Next.js application and can be deployed to:
-- Netlify
-- Railway
-- AWS Amplify
-- Docker
-
-## 🗂️ Project Structure
+Create a `.env.local` file:
 
 ```
-spitalverse/
-├── src/
-│   ├── app/                    # Next.js App Router pages
-│   │   ├── page.tsx            # Dashboard
-│   │   ├── documents/          # Document Vault
-│   │   ├── medications/        # Medication Tracker
-│   │   ├── lab-reports/        # Lab Reports
-│   │   ├── appointments/       # Appointments
-│   │   ├── ai-summary/         # AI Health Summary
-│   │   ├── privacy/            # Privacy & My Data
-│   │   └── api/                # API routes
-│   ├── components/             # Reusable components
-│   ├── store/                  # Zustand state management
-│   └── types/                  # TypeScript interfaces
-├── public/                     # Static assets
-├── .env.example                # Environment variables template
-└── package.json
+OPENAI_API_KEY=sk-your-key-here
 ```
 
-## 🔧 Tech Stack
+Without it, the app still works but the symptom checker and health tips use simpler logic.
 
-- **Framework**: Next.js 16 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS 4
-- **State Management**: Zustand with persistence
-- **AI**: OpenAI GPT-4o-mini (optional)
-- **Icons**: Lucide React
-- **Date Handling**: date-fns
-- **IDs**: uuid
+## Deploying
 
-## 📱 Demo Data
+Easiest way is Vercel:
 
-The app comes pre-loaded with sample data for demonstration:
-- **Profile**: John Doe, Age 39, Blood Group O+
-- **Medications**: Metformin, Amlodipine, Atorvastatin, Vitamin D3
-- **Lab Report**: Annual Health Checkup with 9 values
-- **Appointments**: 2 upcoming doctor visits
+1. Push to GitHub
+2. Import the repo on vercel.com
+3. Add your `OPENAI_API_KEY` in environment variables if you want AI features
+4. Deploy
 
-To reset, go to **My Data** → **Delete All My Data**
+Also works with Netlify, Railway, or anything else that runs Next.js.
 
-## ⚠️ Important Notes
+## Project layout
 
-1. **Data Storage**: All data is stored in browser localStorage
-   - Data persists across sessions
-   - Data is device-specific (not synced)
-   - Clearing browser data will delete health records
+```
+src/
+├── app/
+│   ├── page.tsx              # Dashboard
+│   ├── documents/
+│   ├── medications/
+│   ├── lab-reports/
+│   ├── appointments/
+│   ├── symptom-checker/
+│   ├── health-tips/
+│   ├── ai-summary/
+│   ├── privacy/              # My Data page
+│   └── api/
+│       ├── generate-summary/
+│       ├── symptom-checker/
+│       └── health-tips/
+├── components/
+│   ├── ProfileCard.tsx
+│   ├── Sidebar.tsx
+│   ├── Header.tsx
+│   ├── DocumentVault.tsx
+│   ├── MedicationList.tsx
+│   ├── LabReportManager.tsx
+│   ├── AppointmentManager.tsx
+│   └── ...
+├── store/                    # Zustand store
+└── types/
+```
 
-2. **Medical Disclaimer**: This app is for informational purposes only and does not replace professional medical advice.
+## Built with
 
-3. **Lab Values**: Based on German/EU standards. Consult your doctor for interpretation.
+- Next.js 16 (App Router)
+- TypeScript
+- Tailwind CSS 4
+- Zustand for state (with localStorage persistence)
+- Lucide icons
+- date-fns
+- OpenAI API (optional)
 
-## 📄 License
+## Demo data
 
-MIT License - feel free to use for personal or commercial projects.
+The app comes with sample data so you can see how it works right away. Go to My Data → Delete All My Data to start fresh.
+
+## Heads up
+
+- All data lives in localStorage. Clear your browser data and it's gone.
+- This is for personal tracking, not medical advice. Always talk to a real doctor.
+- Lab reference ranges are based on German/EU standards.
 
 ---
 
-**Spitalverse** - Your Personal Health Records, Your Control.
+MIT License
+
+© 2026 Spitalverse
